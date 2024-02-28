@@ -33,6 +33,16 @@ public class LeetCode909 {
                 { 2,  4, 11, 18,  8},
                 {-1, -1, -1, -1, -1}
         };
+        int[][] board3 = {
+                {-1,-1,-1},
+                {-1,9,8},
+                {-1,8,9}
+        };
+        int[][] board4 = {
+                {1,1,-1},
+                {1,1,1},
+                {-1,1,1}
+        };
         System.out.println(snakesAndLadders(board2));
     }
 
@@ -40,30 +50,21 @@ public class LeetCode909 {
         int boardSize = board.length;
         int[] finalCoordinate = coordinate(boardSize * boardSize, boardSize);
         // 对于终点有梯子，或者蛇尾，直接返回-1，不可能到达。
-        if (board[finalCoordinate[0]][finalCoordinate[1]] != -1) return -1;
+        // if (board[finalCoordinate[0]][finalCoordinate[1]] != -1) return -1;
         Queue<Node> queue = new LinkedList<>();
         queue.offer(new Node(1, 0));
         int n2 = boardSize * boardSize;
-        int res = n2;
-        int nums = n2;
-        int[][] map = new int[boardSize][boardSize];
+        boolean[] flag = new boolean[n2];
         while (!queue.isEmpty()) {
             Node curNode = queue.poll();
             if (curNode.value == n2) {
-                res = curNode.number;
-                break;
+                return curNode.number;
             }
-            int[] curCoordinate =  coordinate(curNode.value, boardSize);
-            map[curCoordinate[0]][curCoordinate[1]]++;
-            if (map[curCoordinate[0]][curCoordinate[1]] >= n2) {
-                return -1;
-            }
+            if (flag[curNode.value]) continue;
+            flag[curNode.value] = true;
             for (int i = 1; i <= 6; i++) {
                 int next = curNode.value + i;
                 if (next > n2) break;
-                if (next == n2) {
-                    return curNode.number + 1;
-                }
                 int[] nextCoordinate = coordinate(next, boardSize);
                 int value = board[nextCoordinate[0]][nextCoordinate[1]];
                 if (value == -1) {
@@ -73,7 +74,7 @@ public class LeetCode909 {
                 }
             }
         }
-        return res;
+        return -1;
     }
 
     @Test
