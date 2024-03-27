@@ -25,10 +25,22 @@ public class LeetCode34 {
         return res;
     }
 
+    public int[] searchRange2(int[] nums, int target) {
+        int[] res = new int[2];
+        int targetRight = binaryMoreTarget(nums, target);
+        int targetLeft = binaryMoreTarget(nums, target - 1);
+        if (targetRight <= targetLeft) {
+            return new int[] {-1, -1};
+        }
+        res[0] = targetLeft;
+        res[1] = targetRight - 1;
+        return res;
+    }
+
     @Test
     public void test() {
         int[] nums = {5, 6, 7, 7, 7, 7, 8, 8, 10};
-        int[] ints = searchRange(nums, 7);
+        int[] ints = searchRange2(nums, 7);
         for (int i = 0; i < ints.length; i++) {
             System.out.println(ints[i]);
         }
