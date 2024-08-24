@@ -13,8 +13,18 @@ package org.leetcode;
 public class LeetCode121 {
     public static void main(String[] args) {
         int[] prices = {7,1,5,3,6,4};
-        int maxProfit = maxProfit2(prices);
+        int maxProfit = maxProfit3(prices);
         System.out.println(maxProfit);
+    }
+
+    static int maxProfit3(int[] prices) {
+        int min = prices[0];
+        int maxProfit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            min = Math.min(prices[i], min);
+            maxProfit = Math.max(prices[i] - min, maxProfit);
+        }
+        return maxProfit;
     }
 
     /**

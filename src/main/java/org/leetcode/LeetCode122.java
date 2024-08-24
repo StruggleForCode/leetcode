@@ -1,5 +1,7 @@
 package org.leetcode;
 
+import org.junit.jupiter.api.Test;
+
 /**
  * ClassName: LeetCode122
  * Package: org.leetcode
@@ -28,6 +30,26 @@ public class LeetCode122 {
         }
         return max;
     }
+    @Test
+    public void test() {
+        int[] prices = {7,1,5,3,6,4};
+        System.out.println(maxProfit2(prices));
+    }
+
+    public int maxProfit2(int[] prices) {
+        int profits = 0;
+        int minPrice = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            int curPrice = prices[i];
+            if (curPrice > minPrice) {
+                profits += curPrice - minPrice;
+            }
+            minPrice = curPrice;
+        }
+
+        return profits;
+    }
+
 }
 
 /*
