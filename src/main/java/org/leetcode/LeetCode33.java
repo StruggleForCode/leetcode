@@ -11,6 +11,13 @@ package org.leetcode;
  */
 public class LeetCode33 {
     public int search(int[] nums, int target) {
-        // 无效提交
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            int mid = (right - left) / 2 + left;
+            if (nums[mid] == target) return mid;
+
+        }
+        return 0;
     }
 }
